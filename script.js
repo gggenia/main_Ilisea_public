@@ -299,10 +299,23 @@ function moveWithDirection(key) {
   if (setDirection(directions[key])) tick();
 }
 
+function getBoardDirection(event) {
+  const bounds = board.getBoundingClientRect();
+  const offsetX = event.clientX - (bounds.left + bounds.width / 2);
+  const offsetY = event.clientY - (bounds.top + bounds.height / 2);
+  if (Math.abs(offsetX) > Math.abs(offsetY)) return offsetX < 0 ? 'ArrowLeft' : 'ArrowRight';
+  return offsetY < 0 ? 'ArrowUp' : 'ArrowDown';
+}
+
 document.addEventListener('keydown', (event) => {
   if (!directions[event.key]) return;
   event.preventDefault();
   moveWithDirection(event.key);
+});
+board.addEventListener('pointerdown', (event) => {
+  if (event.target.closest('.game-overlay')) return;
+  event.preventDefault();
+  moveWithDirection(getBoardDirection(event));
 });
 arrowControls.forEach((button) => button.addEventListener('click', () => moveWithDirection(button.dataset.direction)));
 replayButton.addEventListener('click', restartCurrentLevel);
