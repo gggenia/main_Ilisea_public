@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sea1 | הנחש</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800&family=Rubik+Mono+One&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">✦</span><span>sea1</span></div>
+        <div class="status"><span class="status-dot"></span><span id="statusText">משחק פעיל</span></div>
+      </header>
+      <section class="intro">
+        <div><p class="eyebrow">SNAKE LAB / 004</p><h1>הנחש<br /><em>הרעב</em></h1></div>
+        <p class="lead">אספו את כל הנקודות, גדלו, והיזהרו משתי הכדורים האדומים.</p>
+      </section>
+      <section class="game-shell" aria-label="משחק הנחש">
+        <div class="score-panel"><span>נקודות</span><strong id="score">00</strong><small id="target">מתוך 12</small></div>
+        <div class="game-board" id="gameBoard" tabindex="0" aria-label="לוח המשחק. השתמשו בחצים כדי לזוז">
+          <div class="board-grid"></div>
+          <div class="walls-layer" id="wallsLayer"></div>
+          <div class="hazard hazard-one" aria-label="כדור אדום"></div>
+          <div class="hazard hazard-two" aria-label="כדור אדום"></div>
+          <div class="food-layer" id="foodLayer"></div>
+          <div class="snake-layer" id="snakeLayer"></div>
+          <div class="game-overlay" id="gameOverlay" hidden>
+            <div class="overlay-card">
+              <span class="overlay-icon" id="overlayIcon">✦</span>
+              <p class="eyebrow" id="overlayEyebrow">נפסלתם</p>
+              <h2 id="overlayTitle">אוי, הנחש נגע בכדור</h2>
+              <p id="overlayText">הניקוד שלכם: 00</p>
+              <div class="overlay-actions">
+                <button class="replay-button" id="replayButton" type="button">תרצה לעשות עוד פעם? <span>↻</span></button>
+                <button class="next-button" id="nextButton" type="button" hidden>לעבור לשלב הבא <span>→</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="game-tip"><span class="keycap">↑</span><span class="keycap">↓</span><span class="keycap">←</span><span class="keycap">→</span> זוזו עם החצים ואספו את הנקודות</p>
+        <div class="arrow-controls" aria-label="כפתורי תנועה">
+          <button type="button" data-direction="ArrowUp" aria-label="למעלה">↑</button>
+          <div><button type="button" data-direction="ArrowLeft" aria-label="שמאלה">←</button><button type="button" data-direction="ArrowDown" aria-label="למטה">↓</button><button type="button" data-direction="ArrowRight" aria-label="ימינה">→</button></div>
+        </div>
+        <section class="quiz-panel" id="quizPanel" hidden aria-label="שלב מתמטיקה">
+          <div class="quiz-topline"><span class="eyebrow" id="quizEyebrow">MATH LAB / 003</span><strong id="questionNumber">שאלה 1 מתוך 5</strong></div>
+          <div class="quiz-star">＋</div>
+          <h2 id="questionText">כמה זה 2 + 3?</h2>
+          <p>בחרו תשובה אחת</p>
+          <div class="answers" id="answers"></div>
+          <div class="quiz-result" id="quizResult" aria-live="polite"></div>
+          <div class="quiz-actions" id="quizActions" hidden>
+            <button class="replay-button" id="quizReplay" type="button">לעשות שוב <span>↻</span></button>
+            <button class="next-button" id="quizNext" type="button">תרצו לעבור לשלב הבא <span>→</span></button>
+          </div>
+        </section>
+        <section class="prize-panel" id="prizePanel" hidden aria-label="בחירת פרס">
+          <div class="sparkles" aria-hidden="true"><span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span></div>
+          <p class="eyebrow">VICTORY LAB / 005</p>
+          <h2>כל הכבוד!</h2>
+          <p class="prize-question">באיזה פרס תרצו לבחור?</p>
+          <div class="prize-options">
+            <button class="prize-button cake-button" type="button" data-prize="עוגה"><span class="prize-art">🍰</span><strong>עוגה</strong></button>
+            <button class="prize-button chips-button" type="button" data-prize="פרינגלס"><span class="prize-art">🥔</span><strong>פרינגלס</strong></button>
+          </div>
+          <div class="table-scene">
+            <div class="table-prize" id="tablePrize">הפרס מחכה למטה על השולחן</div>
+            <div class="table-top"></div><div class="table-leg leg-left"></div><div class="table-leg leg-right"></div>
+          </div>
+          <button class="restart-all-button" id="restartAllButton" type="button">להתחיל מהתחלה <span>↻</span></button>
+        </section>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
