@@ -299,10 +299,10 @@ function moveWithDirection(key) {
   if (setDirection(directions[key])) tick();
 }
 
-function getBoardDirection(event) {
+function getBoardDirection(clientX, clientY) {
   const bounds = board.getBoundingClientRect();
-  const offsetX = event.clientX - (bounds.left + bounds.width / 2);
-  const offsetY = event.clientY - (bounds.top + bounds.height / 2);
+  const offsetX = clientX - (bounds.left + bounds.width / 2);
+  const offsetY = clientY - (bounds.top + bounds.height / 2);
   if (Math.abs(offsetX) > Math.abs(offsetY)) return offsetX < 0 ? 'ArrowLeft' : 'ArrowRight';
   return offsetY < 0 ? 'ArrowUp' : 'ArrowDown';
 }
@@ -313,10 +313,17 @@ document.addEventListener('keydown', (event) => {
   moveWithDirection(event.key);
 });
 board.addEventListener('pointerdown', (event) => {
-  if (event.target.closest('.game-overlay')) return;
+  if (event.pointerType === 'touch' || event.target.closest('button')) return;
   event.preventDefault();
-  moveWithDirection(getBoardDirection(event));
+  moveWithDirection(getBoardDirection(event.clientX, event.clientY));
 });
+board.addEventListener('touchstart', (event) => {
+  if (event.target.closest('button')) return;
+  const touch = event.changedTouches[0];
+  if (!touch) return;
+  event.preventDefault();
+  moveWithDirection(getBoardDirection(touch.clientX, touch.clientY));
+}, { passive: false });
 arrowControls.forEach((button) => button.addEventListener('click', () => moveWithDirection(button.dataset.direction)));
 replayButton.addEventListener('click', restartCurrentLevel);
 nextButton.addEventListener('click', startNextLevel);
