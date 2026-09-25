@@ -195,7 +195,7 @@ function answerQuestion(answer) {
 
 function startRiddles() {
   level = 4;
-  quizEyebrow.textContent = 'RIDDLE LAB / 004';
+  quizEyebrow.textContent = 'RIDDLE LAB / 005';
   statusText.textContent = 'שלב 4: חידות';
   activeQuestions = riddleQuestions;
   questionIndex = 0;
